@@ -40,6 +40,15 @@ export function tableReducer(state: ITables = INITIAL_STATE, action): ITables {
     case ITEM_REMOVED:
       return state.setIn([tableIndex, 'order', action.payload.menuId], 0,
         value => value === 0 ? 0 : value - 1);
-    
+    case BILL_PAID:
+      return state.setIn([tableIndex, 'status'], DIRTY);
+    case TABLE_CLEANED:
+      return state.setIn([tableIndex, 'status'], CLEAN);
+    case ORDER_COMPLETED:
+      return state.setIn([tableIndex, 'status'], ORDERED);
+    case ORDER_DELIVERED:
+      return state.setIn([tableIndex, 'status'], HAS_FOOD);
+    default:
+      return state;
   }
 };
